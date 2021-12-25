@@ -27,14 +27,14 @@ function fillButton(index, text) {
 
 function clickButton(index) {
   
-  if(turn >=0 && turn <=8){
+  if(turn >=0 && turn <9){
     console.log(index);
     
     
     if(cond != index){
-      fillButton(index,checkPlayer(index)); 
-      winningAlert(checkPlayer());
       cond =index;
+      fillButton(index,checkPlayer(index)); 
+      winningAlert(checkPlayer(index));
    return turn++;
     }
   }
@@ -48,13 +48,14 @@ function clickButton(index) {
   // in this function you should check if the player is X or O
   function checkPlayer(input) {
     
-    if(turn % 2 ==0){
+    if(turn% 2 ==0){
       arrX.push(input);
-      console.log(arrX);
+     
       return "X";
-    }else{
+    }else if(turn%2!=0){
       arrO.push(input);
-      console.log(arrO);
+     
+      
       return "O";
     }
 
@@ -74,15 +75,13 @@ function restart(){
   cond=0;
   arrX=[];
   arrO=[];
-  fillButton(1,""); 
-  fillButton(2,""); 
-  fillButton(3,""); 
-  fillButton(4,""); 
-  fillButton(5,""); 
-  fillButton(6,""); 
-  fillButton(7,""); 
-  fillButton(8,""); 
-  fillButton(9,""); 
+ 
+  for (let i = 1; i <= 9; i++) {
+    
+    fillButton(i,""); 
+  
+  }
+  
 }
 
 // premade a function. You can use this function to present an alert to say somene wins
@@ -99,7 +98,7 @@ function winningAlert(winner) {
   const d2x =(arrX.includes(3) && arrX.includes(5) && arrX.includes(7));
 
 
-  const r1o =(arrO.includes(1) && arr0.includes(2) && arrO.includes(3));
+  const r1o =(arrO.includes(1) && arrO.includes(2) && arrO.includes(3));
   const r3o =(arrO.includes(7) && arrO.includes(8) && arrO.includes(9));
   const c1o =(arrO.includes(1) && arrO.includes(4) && arrO.includes(7));
   const r2o =(arrO.includes(4) && arrO.includes(5) && arrO.includes(6));
