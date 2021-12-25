@@ -1,16 +1,14 @@
 // Premade function that will fill the button with its number.
 // First button top left is called 1, last button bottom right is 9
 let turn=0;
-let cond;
+let cond=0;
 let arrX=[];
-let arrO=[]
+let arrO=[];
 
 function fillButton(index, text) {
   // This function fills
   
- 
   document.getElementById(index).innerHTML = text;
-  
   
 }
 
@@ -35,11 +33,8 @@ function clickButton(index) {
     
     if(cond != index){
       fillButton(index,checkPlayer(index)); 
-     
-      
-    
-   cond =index;
-   checkWinner();
+      winningAlert(checkPlayer());
+      cond =index;
    return turn++;
     }
   }
@@ -53,8 +48,6 @@ function clickButton(index) {
   // in this function you should check if the player is X or O
   function checkPlayer(input) {
     
-    
-    
     if(turn % 2 ==0){
       arrX.push(input);
       console.log(arrX);
@@ -64,8 +57,6 @@ function clickButton(index) {
       console.log(arrO);
       return "O";
     }
-    
-
 
 }
 
@@ -75,7 +66,28 @@ function clickButton(index) {
  * who is winning and returns the winner
  */
 // function checkWinner
-function checkWinner(index){
+
+
+// function restart game
+function restart(){
+  turn=0;
+  cond=0;
+  arrX=[];
+  arrO=[];
+  fillButton(1,""); 
+  fillButton(2,""); 
+  fillButton(3,""); 
+  fillButton(4,""); 
+  fillButton(5,""); 
+  fillButton(6,""); 
+  fillButton(7,""); 
+  fillButton(8,""); 
+  fillButton(9,""); 
+}
+
+// premade a function. You can use this function to present an alert to say somene wins
+function winningAlert(winner) {
+
 
   const r1x =(arrX.includes(1) && arrX.includes(2) && arrX.includes(3));
   const r2x =(arrX.includes(4) && arrX.includes(5) && arrX.includes(6));
@@ -98,18 +110,16 @@ function checkWinner(index){
 
 
 if(r1x|| r2x||r3x||c1x||c2x||c3x||d1x||d2x){
-
-  console.log( "X Win")
-}else if(r1o||r2o||r3o||c1o||c2o||c3o||d1o||d2o){
-  console.log( "O Win")
-}
-
   
-}
-
-// function restart game
-
-// premade a function. You can use this function to present an alert to say somene wins
-function winningAlert(winner) {
+  
   alert(`Horraaay, ${winner} wins!`);
+  console.log( `${winner} Win`)
+  restart();
+}else if(r1o||r2o||r3o||c1o||c2o||c3o||d1o||d2o){
+  
+  
+  alert(`Horraaay, ${winner} wins!`);
+  console.log( `${winner} Win`)
+  restart();
+}
 }
